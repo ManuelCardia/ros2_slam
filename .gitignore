@@ -1,0 +1,9 @@
+build/
+install/
+log/
+rosbag2_*/
+*.db3
+*.mcap
+info.txt
+maps/*.posegraph
+maps/*.data
