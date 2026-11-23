@@ -1,0 +1,24 @@
+pointcloud_to_laserscan_node:
+  ros__parameters:
+    # Empty = keep original cloud frame (rslidar).
+    # SLAM Toolbox will resolve rslidar->UGV_base_link via /tf_static from the bag.
+    target_frame: ""
+
+    # Height filter in the rslidar sensor frame (Z=0 is the sensor itself, 0.5m above ground).
+    # min_height -0.4 => keeps points from 0.5-0.4=0.1m above ground upward (removes floor).
+    # max_height  0.5 => keeps points up to 0.5+0.5=1.0m above ground (removes ceiling).
+    min_height: -0.4
+    max_height:  0.5
+
+    angle_min: -3.14159265
+    angle_max:  3.14159265
+    angle_increment: 0.00872665  # 0.5 degree resolution = 720 beams
+
+    # The lidar runs at ~5Hz in this bag (956 messages / 191 seconds).
+    # scan_time must match: wrong value causes timestamp misalignment in SLAM.
+    scan_time: 0.2
+
+    range_min: 0.2
+    range_max: 20.0
+    use_inf: true
+    inf_epsilon: 1.0

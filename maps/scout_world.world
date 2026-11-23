@@ -1,0 +1,49 @@
+include "scout_mini.inc"
+
+define floorplan model
+(
+  color "gray30"
+  boundary 1
+  gui_nose 0
+  gui_grid 0
+  gui_outline 0
+  gripper_return 0
+  fiducial_return 0
+  ranger_return 1
+)
+
+resolution 0.02    # Stage physics resolution: 2cm per cell
+interval_sim 100   # simulation timestep: 100ms = 10Hz
+
+window
+(
+  size [ 700.0 700.0 ]
+  center [ 0.0 0.0 ]
+  rotate [ 0.0 0.0 ]
+  scale 30
+)
+
+floorplan
+(
+  name "environment"
+  bitmap "my_map.pgm"
+
+  # Physical size = image_pixels * resolution_from_yaml
+  # 616px * 0.05 = 30.80m,  350px * 0.05 = 17.50m
+  size [ 30.80 17.50 2.0 ]
+
+  # CRITICAL: Stage Y is flipped relative to ROS Y (stageros negates Y).
+  # ROS map center = (8.56, -3.95)
+  # Stage map center = (8.56, -(-3.95)) = (8.56, 3.95)
+  pose [ 8.55 -3.95 0.0 0.0 ]
+)
+
+scout_mini
+(
+  # Stage (0.0, 0.0) -> stageros publishes ROS (0.0, 0.0)
+  # Confirmed: ROS (0,0) is a free cell in the map (pixel value 254)
+  # AMCL initial_pose in nav2.yaml must match: x=0.0, y=0.0
+  pose [ 0.0 0.0 0.0 0.0 ]
+  name "robot"
+  color "blue"
+)
