@@ -158,10 +158,6 @@ Stage and ROS use different Y conventions (Stage's Y is negated by `stageros`). 
 * The map is built from a single bag of a dynamic environment: transient obstacles may appear as static artefacts (visible as free-space "rays" at the map borders).
 * The Stage world comment states a 616 px width whereas `my_map.pgm` is 617 × 350 px (≈5 cm discrepancy in the world size). Negligible for this use but worth correcting.
 
-## License
-
-MIT (see `package.xml`). Add a `LICENSE` file and replace the placeholder maintainer name/e-mail in `package.xml` before publishing.
-
 ## Author
 
 Manuel Cardia — Politecnico di Milano
